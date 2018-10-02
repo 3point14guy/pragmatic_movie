@@ -15,19 +15,19 @@ describe Playlist do
     end
 
     it "gives a movie a thumbup if a high number is rolled" do
-      @playlist.stub(:roll_die).and_return(5)
+      Reviewer.stub(:roll_die).and_return(5)
       @playlist.play
       expect(@movie.rank).to eq(@initial_rank + 1)
     end
 
     it "skips the movie if a medium number is rolled" do
-      @playlist.stub(:roll_die).and_return(3)
+      Reviewer.stub(:roll_die).and_return(3)
       @playlist.play
       expect(@movie.rank).to eq(@initial_rank)
     end
 
     it "it gives the movie a thumbs down if a low number is rolled" do
-      @playlist.stub(:roll_die).and_return(1)
+      Reviewer.stub(:roll_die).and_return(1)
       @playlist.play
       expect(@movie.rank).to eq(@initial_rank-1)
     end
