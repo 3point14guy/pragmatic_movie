@@ -7,6 +7,10 @@ class Movie
     @rank = rank
   end
 
+  def <=>(other_movie)
+    other_movie.rank <=> @rank
+  end
+  
   def normalized_rank
     @rank / 10
   end
