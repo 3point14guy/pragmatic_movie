@@ -14,6 +14,13 @@ class Movie
     puts "#{@title}'s snacks: #{@snack_carbs}"
   end
 
+  def each_snack
+    @snack_carbs.each do |name, carbs|
+      snack = Snack.new(name, carbs)
+      yield snack
+    end
+  end
+
   def carbs_consumed
     @snack_carbs.values.reduce(0, :+)
   end
