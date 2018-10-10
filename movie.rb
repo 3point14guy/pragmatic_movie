@@ -8,6 +8,19 @@ class Movie
     @snack_carbs = Hash.new(0)
   end
 
+  # clean up from original playlist.rb code for saving to a csv
+  def to_csv
+    "#{@title},#{@rank}"
+  end
+
+  # clean up from original playlist.rb code for creating a movie from a csv
+  def self.from_csv(line)
+    title, rank = line.split(",")
+    # Movie.new(title, rank.to_i)
+    # forming an integer this way will throw an exception if rank cannot be converted
+    Movie.new(title, Integer(rank))
+  end
+
   def ate_snack(snack)
     @snack_carbs[snack.name] += snack.carbs
     puts "#{@title} led to #{snack.carbs} #{snack.name} carbs being consumed."

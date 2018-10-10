@@ -13,6 +13,24 @@ class Playlist
     # same as @movies.push(movie)
   end
 
+  def load(from_file)
+    File.readlines(from_file).each do |line|
+      # title, rank = line.split(",")
+      # movie = Movie.new(title, rank.to_i)
+      # add_movie(movie)
+      add_movie(Movie.from_csv(line))
+    end
+  end
+
+  def save(to_file="movie_rankings.csv")
+    File.open(to_file, "w") do |file|
+      @movies.sort.each do |movie|
+        # file.puts "#{movie.title},#{movie.rank}"
+        file.puts movie.to_csv
+      end
+    end
+  end
+
   def play(viewings)
     puts "#{@name}'s playlist:"
     puts @movies.sort
