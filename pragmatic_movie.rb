@@ -1,5 +1,6 @@
 require_relative 'movie'
 require_relative 'playlist'
+require_relative 'movie3d'
 # could also just do require_relative 'playlist' as the playlist file already has a require_relative 'movie' in it
 
 
@@ -16,6 +17,8 @@ playlist1 = Playlist.new("Kermit")
 # if no argument is passed, movies.csv will be used by default.
 # calling .shift on ARGV will remove the first arguement from the ARGV array so that it wont get called and used again
 playlist1.load(ARGV.shift || "movies.csv")
+movie3d  = Movie3d.new('gone with the wind', 5, 20)
+playlist1.add_movie(movie3d)
 
 loop do
   puts "\nHow many viewings? (type 'quit' to exit)"
