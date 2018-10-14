@@ -1,6 +1,11 @@
+require_relative 'rankable'
+
 class Movie
-  attr_accessor :title
-  attr_reader :rank
+  include Rankable
+
+  attr_accessor :title, :rank
+  # "attr_reader" worked fine when :rank was all still in the Movie class, now that it's been moved to it's own module, we need to move :rank to "attr_accessor"
+  # attr_reader :rank
 
   def initialize(title, rank = 0)
     @title = title.capitalize
@@ -38,33 +43,10 @@ class Movie
     @snack_carbs.values.reduce(0, :+)
   end
 
-  def <=>(other_movie)
-    other_movie.rank <=> @rank
-  end
-
-  def normalized_rank
-    @rank / 10
-  end
-
   def to_s
     "#{@title} has a rank of #{@rank} (#{status})"
   end
 
-  def thumbs_up
-    @rank = @rank + 1
-  end
-
-  def thumbs_down
-    @rank -= 1
-  end
-
-  def hit?
-    @rank >= 10
-  end
-
-  def status
-    hit? ? "Hit" : "Flop"
-  end
 end
 
 # this if statement checks to see __FILE__ (the current file name) equates to $0 (the currently running program)
